@@ -19,11 +19,13 @@ class Destinations extends Migration
             $table->string('name')->nullable();
             $table->string('country')->nullable();
             $table->string('parent')->nullable();
-            $table->multiPolygon('longitude')->nullable();
-            $table->multiPolygon('latitude')->nullable();
+            $table->string('longitude')->nullable();
+            $table->string('latitude')->nullable();
             $table->text('regions')->nullable();
-            $table->timestamps();
+            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamp('created_at')->useCurrent();
         });
+
     }
 
     /**
