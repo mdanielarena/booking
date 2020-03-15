@@ -23,12 +23,12 @@ class Hotels extends Migration
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
             $table->string('address')->nullable();
-            $table->json('descriptions')->nullable();
+            $table->text('descriptions')->nullable();
             $table->string('hotel_type')->nullable();
-            $table->json('images')->nullable();
+            $table->text('images')->nullable();
             $table->string('destination')->nullable();
             $table->string('country')->nullable();
-            $table->json('regions')->nullable();
+            $table->text('regions')->nullable();
             $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('created_at')->useCurrent();
         });
