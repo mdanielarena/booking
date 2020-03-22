@@ -17,7 +17,7 @@ class Hotels extends Migration
             $table->id();
             $table->string('code')->nullable();
             $table->string('name')->nullable();
-            $table->double('stars')->nullable();
+            $table->string('stars')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->string('latitude')->nullable();
