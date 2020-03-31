@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ mix('/css/assets_css.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @yield('styles')
-    <title>Let's Travel</title>
+    <title>Let's Travels</title>
     <script type='text/javascript'> 
         const url   = '<?php echo url("/")?>';
         const token = document.getElementsByTagName("meta")["csrf-token"].getAttribute("content");
