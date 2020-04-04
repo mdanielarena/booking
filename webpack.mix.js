@@ -20,10 +20,7 @@ const mix = require('laravel-mix');
     'resources/assets_js/jquery.viewportchecker.min.js',
     'resources/assets_js/isotope.pkgd.min.js',
     'resources/assets_js/jquery.mousewheel.min.js',
-<<<<<<< HEAD
     'resources/assets_js/base64.js',
-=======
->>>>>>> 0b27777b96fcda0cb4d1b9a7da684fbaff1a3d38
     'resources/assets_js/all.js',
 ],'public/js/assets_js.js')
 .styles([

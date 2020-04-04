@@ -19,7 +19,7 @@ trait hpApi {
         $this->h_url = config('app.h_url');
     
         $ch = curl_init($this->h_url.$url.$code);
-
+        
         if($method == 'post') {
             curl_setopt($ch, CURLOPT_POST, 1); 
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -31,7 +31,7 @@ trait hpApi {
             $response = curl_exec($ch);
             curl_close($ch);
             $val = json_decode($response,true);
-            
+            print_r($val);die;
             return $val;
     }
 

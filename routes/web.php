@@ -20,6 +20,6 @@ Route::get('/test-provision','HotelsPro\TestController@provision');
 
 Route::post('/login-post','Auth\LoginController@authenticate');
 Route::post('/signup-post','Auth\RegisterController@register');
-Route::get('/signout-post','Auth\LoginController@signout');
+Route::get('/signout-post','Auth\LoginController@signout'); 
 
 

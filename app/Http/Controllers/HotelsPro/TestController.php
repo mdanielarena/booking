@@ -16,7 +16,7 @@ class TestController extends Controller
 
     public function search() {
         
-        $url  = "/search/?pax=3&checkout=2020-04-25&checkin=2020-04-20&destination_code=1230d&client_nationality=ph&currency=EUR";
+        $url  = "/search/?pax=3&checkout=2020-04-25&checkin=2020-04-22&destination_code=1230d&client_nationality=ph&currency=EUR";
         $data = '';
         $code = '';
         $method = "get";
