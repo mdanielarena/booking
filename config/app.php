@@ -229,4 +229,8 @@ return [
 
     ],
 
+    // 'h_url' => env('LIVE_HOTELSPRO_URL'),
+    // 'h_u'   => env('LIVE_HOTELSPRO_U'),
+    // 'h_p'   => env('LIVE_HOTELSPRO_P')
+    
 ];

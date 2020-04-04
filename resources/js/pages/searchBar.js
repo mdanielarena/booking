@@ -1,0 +1,3 @@
+window.searchInput = () => {
+    alert('searchInput');
+}

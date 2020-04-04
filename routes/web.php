@@ -14,3 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/','HomeController@index');
+Route::get('/test-search','HotelsPro\TestController@search');
+Route::get('/test-hotelAvailability','HotelsPro\TestController@hotelAvailability');
+Route::get('/test-provision','HotelsPro\TestController@provision');
+
+Route::post('/login-post','Auth\LoginController@authenticate');
+Route::post('/signup-post','Auth\RegisterController@register');
+Route::get('/signout-post','Auth\LoginController@signout');
+
+

@@ -87,8 +87,8 @@ $(function() {
 		var initValue = $('.filter-nav').find('.selected a').attr('data-filter');
 		$container.isotope({itemSelector: '.item', filter: initValue,masonry:{gutter:0,columnWidth:'.grid-sizer'}});
 		
-
-
+		// $("#checkIn").datepicker();
+		// $("#checkOut").datepicker();
 	});
 	/*==============================*/
 	/* 05 - FUNCTION ON PAGE RESIZE */
