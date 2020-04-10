@@ -1,5 +1,6 @@
 @section('scripts')
     <script src="{{ mix('/js/login.js') }}"></script>
+    <script src="{{ mix('/js/searchBar.js') }}"></script>
 @endsection()
 
 <header class="color-1 hovered menu-3">

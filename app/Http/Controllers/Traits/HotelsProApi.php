@@ -31,7 +31,6 @@ trait hpApi {
             $response = curl_exec($ch);
             curl_close($ch);
             $val = json_decode($response,true);
-            print_r($val);die;
             return $val;
     }
 

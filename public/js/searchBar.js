@@ -86,16 +86,121 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./resources/js/pages/global.js":
+/*!**************************************!*\
+  !*** ./resources/js/pages/global.js ***!
+  \**************************************/
+/*! exports provided: default, cookie */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return searchFilter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cookie", function() { return cookie; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var searchFilter = /*#__PURE__*/function () {
+  function searchFilter(data) {
+    _classCallCheck(this, searchFilter);
+
+    this._data = data;
+  }
+
+  _createClass(searchFilter, [{
+    key: "filter",
+    value: function filter() {
+      var input, filter, ul, li, a, i, txtValue;
+      input = this._data;
+      filter = this._data.toUpperCase();
+      ul = document.getElementById("myUL");
+      li = ul.getElementsByTagName("li");
+
+      for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        txtValue = a.textContent || a.innerText;
+
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          li[i].style.display = "";
+        } else {
+          li[i].style.display = "none";
+        }
+      }
+    } // constructor(name) {
+    //   // invokes the setter
+    //   this.name = name;
+    // }
+    // get name() {
+    //   return this._name;
+    // }
+    // set name(value) {
+    //     let myUrl = `${url}/search-data`
+    //     let postData = {data:value,_token:token}
+    //     $.post(myUrl,postData, (res) => {
+    //       this._name = res;
+    //     },'json')
+    // }
+
+  }]);
+
+  return searchFilter;
+}();
+
+
+var cookie = function cookie() {
+  _classCallCheck(this, cookie);
+};
+
+/***/ }),
+
 /***/ "./resources/js/pages/searchBar.js":
 /*!*****************************************!*\
   !*** ./resources/js/pages/searchBar.js ***!
   \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _global_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./global.js */ "./resources/js/pages/global.js");
+var _this = undefined;
+
+ //use global if non-ajax return
 
 window.searchInput = function () {
   alert('searchInput');
 };
+
+$("#searchInput").keyup(function (event) {
+  var searchInput = $("#searchInput").val();
+  var myUrl = "".concat(url, "/search-data");
+  var postData = {
+    data: "\"".concat(searchInput, "\""),
+    _token: token
+  };
+  $.post(myUrl, postData, function (res) {
+    new _global_js__WEBPACK_IMPORTED_MODULE_0__["default"](searchInput).filter();
+    var html = "";
+    var data = JSON.parse(Base64.decode(res));
+
+    if (data.succ) {
+      var code = data.val.code;
+      var name = data.val.name;
+      html += "<li><a href=\"#\" class='search-drop' value=\"".concat(code, "\">").concat(name, "</a></li>");
+    } else {
+      html += "<li><a href=\"#\" class='search-drop'>none</a></li>";
+    }
+
+    $("#myUL").html(html);
+  }, 'json');
+});
+$("#myUL").on('click', 'a.search-drop', function () {
+  var code = $(_this).attr('value');
+  console.log($(_this).attr('value'));
+});
 
 /***/ }),
 

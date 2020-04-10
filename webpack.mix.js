@@ -16,6 +16,7 @@ const mix = require('laravel-mix');
     'resources/assets_js/bootstrap.min.js',
     'resources/assets_js/jquery-ui.min.js',
     // 'resources/assets_js/DateTimePicker.min.js',
+    'resources/assets_js/jquery.ba-throttle-debounce.min.js',
     'resources/assets_js/idangerous.swiper.min.js',
     'resources/assets_js/jquery.viewportchecker.min.js',
     'resources/assets_js/isotope.pkgd.min.js',
