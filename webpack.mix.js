@@ -15,7 +15,7 @@ const mix = require('laravel-mix');
     'resources/assets_js/jquery-2.1.4.min.js',
     'resources/assets_js/bootstrap.min.js',
     'resources/assets_js/jquery-ui.min.js',
-    // 'resources/assets_js/DateTimePicker.min.js',
+    'resources/assets_js/DateTimePicker.min.js',
     'resources/assets_js/jquery.ba-throttle-debounce.min.js',
     'resources/assets_js/idangerous.swiper.min.js',
     'resources/assets_js/jquery.viewportchecker.min.js',
@@ -29,7 +29,7 @@ const mix = require('laravel-mix');
     'resources/assets_css/jquery-ui.structure.min.css',
     'resources/assets_css/jquery-ui.min.css',
     'resources/assets_css/font-awesome.min.css',
-    // 'resources/assets_css/DateTimePicker.min.css',
+    'resources/assets_css/DateTimePicker.min.css',
     'resources/assets_css/style.css',
  ],'public/css/assets_css.css')
 .js('resources/js/pages/searchBar.js','public/js')

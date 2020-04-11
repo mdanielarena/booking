@@ -27,6 +27,7 @@ Route::get('/test-provision','HotelsPro\TestController@provision');
 
 //search
 Route::post('search-data','HotelsPro\Search@searchData');
+Route::post('search-post','HotelsPro\Search@searchPost');
 
 
 

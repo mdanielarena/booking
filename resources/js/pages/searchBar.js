@@ -8,31 +8,32 @@ $("#searchInput").keyup((event) => {
 
     var searchInput = $("#searchInput").val()
     var myUrl    = `${url}/search-data`
-    var postData = {data:`"${searchInput}"`,_token:token}
+    var postData = {data:`${searchInput}`,_token:token}
     
     $.post(myUrl,postData, (res) => {
 
         new searchFilter(searchInput).filter()
-        let html = ""
+        var html = ""
         let data = JSON.parse(Base64.decode(res))
         if(data.succ) {
             var code = data.val.code
             var name = data.val.name
-            html += `<li><a href="#" class='search-drop' value="${code}">${name}</a></li>`
+            html += "<li><a href='#' onClick='filterData(\""+code+"\","+name+")'>"+name+"</a></li>"
+            $("#filterData").html(html)
         } else {
-            html += `<li><a href="#" class='search-drop'>none</a></li>`
+            html += `<li><a href="#" >none</a></li>`
+            $("#filterData").html(html)
         }
-
-        $("#myUL").html(html)
-
+        
     },'json')
 
 })
 
-$("#myUL").on('click','a.search-drop', () => {
-    var code = $(this).attr('value');
-    console.log($(this).attr('value'))
-})
+window.filterData = (code,name) => {
+    $("#filterValue").val(code)
+    $("#searchInput").attr('placeholder',name)
+}
+
 
 
 

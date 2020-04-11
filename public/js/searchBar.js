@@ -116,7 +116,7 @@ var searchFilter = /*#__PURE__*/function () {
       var input, filter, ul, li, a, i, txtValue;
       input = this._data;
       filter = this._data.toUpperCase();
-      ul = document.getElementById("myUL");
+      ul = document.getElementById("filterData");
       li = ul.getElementsByTagName("li");
 
       for (i = 0; i < li.length; i++) {
@@ -166,8 +166,6 @@ var cookie = function cookie() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _global_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./global.js */ "./resources/js/pages/global.js");
-var _this = undefined;
-
  //use global if non-ajax return
 
 window.searchInput = function () {
@@ -178,7 +176,7 @@ $("#searchInput").keyup(function (event) {
   var searchInput = $("#searchInput").val();
   var myUrl = "".concat(url, "/search-data");
   var postData = {
-    data: "\"".concat(searchInput, "\""),
+    data: "".concat(searchInput),
     _token: token
   };
   $.post(myUrl, postData, function (res) {
@@ -189,18 +187,19 @@ $("#searchInput").keyup(function (event) {
     if (data.succ) {
       var code = data.val.code;
       var name = data.val.name;
-      html += "<li><a href=\"#\" class='search-drop' value=\"".concat(code, "\">").concat(name, "</a></li>");
+      html += "<li><a href='#' onClick='filterData(\"" + code + "\"," + name + ")'>" + name + "</a></li>";
+      $("#filterData").html(html);
     } else {
-      html += "<li><a href=\"#\" class='search-drop'>none</a></li>";
+      html += "<li><a href=\"#\" >none</a></li>";
+      $("#filterData").html(html);
     }
-
-    $("#myUL").html(html);
   }, 'json');
 });
-$("#myUL").on('click', 'a.search-drop', function () {
-  var code = $(_this).attr('value');
-  console.log($(_this).attr('value'));
-});
+
+window.filterData = function (code, name) {
+  $("#filterValue").val(code);
+  $("#searchInput").attr('placeholder', name);
+};
 
 /***/ }),
 

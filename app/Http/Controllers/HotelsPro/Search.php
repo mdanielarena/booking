@@ -25,4 +25,10 @@ class Search extends Controller
         return ($val) ? response()->json(base64_encode(json_encode(['succ'=>1,'val'=>$val]))) 
                       : response()->json(base64_encode(json_encode(['succ'=>0,'val'=>$val])));
     }
+
+    public function searchPost(Request $request) {
+
+        print_r($request->all());die;
+
+    }
 }

@@ -9,7 +9,7 @@ export default class searchFilter {
     var input, filter, ul, li, a, i, txtValue;
     input  = this._data;
     filter = this._data.toUpperCase();
-    ul = document.getElementById("myUL");
+    ul = document.getElementById("filterData");
     li = ul.getElementsByTagName("li");
     for (i = 0; i < li.length; i++) {
 
