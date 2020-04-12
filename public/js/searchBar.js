@@ -90,12 +90,12 @@
 /*!**************************************!*\
   !*** ./resources/js/pages/global.js ***!
   \**************************************/
-/*! exports provided: default, cookie */
+/*! exports provided: searchFilter, cookie */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return searchFilter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchFilter", function() { return searchFilter; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cookie", function() { return cookie; });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -148,11 +148,44 @@ var searchFilter = /*#__PURE__*/function () {
 
   return searchFilter;
 }();
+var cookie = /*#__PURE__*/function () {
+  function cookie() {
+    _classCallCheck(this, cookie);
+  }
 
+  _createClass(cookie, [{
+    key: "setCookie",
+    value: function setCookie(name, value, exdays) {
+      var d = new Date();
+      d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+      var expires = "expires=" + d.toUTCString();
+      document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    }
+  }, {
+    key: "getCookie",
+    value: function getCookie(cname) {
+      var name = cname + "=";
+      var decodedCookie = decodeURIComponent(document.cookie);
+      var ca = decodedCookie.split(';');
 
-var cookie = function cookie() {
-  _classCallCheck(this, cookie);
-};
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+
+      return "";
+    }
+  }]);
+
+  return cookie;
+}();
 
 /***/ }),
 
@@ -168,10 +201,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _global_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./global.js */ "./resources/js/pages/global.js");
  //use global if non-ajax return
 
-window.searchInput = function () {
-  alert('searchInput');
-};
-
+var mycookie = new _global_js__WEBPACK_IMPORTED_MODULE_0__["cookie"]();
+$(function () {
+  $("#checkIn").val(mycookie.getCookie('checkIn'));
+  $("#checkOut").val(mycookie.getCookie('checkOut'));
+  $("#searchInput").attr('placeholder', mycookie.getCookie('searchInput'));
+});
 $("#searchInput").keyup(function (event) {
   var searchInput = $("#searchInput").val();
   var myUrl = "".concat(url, "/search-data");
@@ -180,7 +215,7 @@ $("#searchInput").keyup(function (event) {
     _token: token
   };
   $.post(myUrl, postData, function (res) {
-    new _global_js__WEBPACK_IMPORTED_MODULE_0__["default"](searchInput).filter();
+    new _global_js__WEBPACK_IMPORTED_MODULE_0__["searchFilter"](searchInput).filter();
     var html = "";
     var data = JSON.parse(Base64.decode(res));
 
@@ -198,7 +233,8 @@ $("#searchInput").keyup(function (event) {
 
 window.filterData = function (code, name) {
   $("#filterValue").val(code);
-  $("#searchInput").attr('placeholder', name);
+  mycookie.setCookie('searchInput', name, 31);
+  $("#searchInput").attr('placeholder', mycookie.getCookie('searchInput'));
 };
 
 /***/ }),

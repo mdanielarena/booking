@@ -385,7 +385,6 @@ $(function() {
 		var initValue = $('.filter-nav').find('.selected a').attr('data-filter');
 		$container.isotope({itemSelector: '.item', filter: initValue,masonry:{gutter:0,columnWidth:'.grid-sizer'}});
 		
-		
 		$(".datepicker").datepicker({dateFormat: 'yyyy-mm-dd'});
 	});
 	/*==============================*/

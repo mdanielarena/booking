@@ -21,9 +21,11 @@
         <div class="clip"><div class="bg bg-bg-chrome" style="background-image:url(img/home_2/main_image.jpg)"></div></div>
         @include('layouts.search_bar')
     </div>
-    {{-- @include('layouts.some_contents') --}}
+      {{-- @include('layouts.some_contents') --}}
+    @yield('content')
     @include('layouts.footer')
     <script src="{{ mix('/js/assets_js.js') }}"></script>
     @yield('scripts')
     </body>
+
 </html>	

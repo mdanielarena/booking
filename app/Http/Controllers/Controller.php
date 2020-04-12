@@ -10,4 +10,11 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function setCookie($name, $value) {
+        
+       setcookie($name, $value, time() + (86400 * 31), "/");
+       
+    }
+
 }

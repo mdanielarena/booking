@@ -1,8 +1,13 @@
-import searchFilter from './global.js'; //use global if non-ajax return
+import { searchFilter, cookie } from './global.js'; //use global if non-ajax return
 
-window.searchInput = () => {
-  alert('searchInput');
-}
+let mycookie = new cookie()
+
+$(() => {  
+    $("#checkIn").val(mycookie.getCookie('checkIn'))
+    $("#checkOut").val(mycookie.getCookie('checkOut'))
+    $("#searchInput").attr('placeholder',mycookie.getCookie('searchInput'))
+})
+
 
 $("#searchInput").keyup((event) => {
 
@@ -31,7 +36,8 @@ $("#searchInput").keyup((event) => {
 
 window.filterData = (code,name) => {
     $("#filterValue").val(code)
-    $("#searchInput").attr('placeholder',name)
+    mycookie.setCookie('searchInput',name,31)
+    $("#searchInput").attr('placeholder',mycookie.getCookie('searchInput'))
 }
 
 
