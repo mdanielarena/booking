@@ -8,7 +8,6 @@ $(() => {
     $("#searchInput").attr('placeholder',mycookie.getCookie('searchInput'))
 })
 
-
 $("#searchInput").keyup((event) => {
 
     var searchInput = $("#searchInput").val()
