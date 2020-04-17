@@ -23,7 +23,7 @@ $("#searchInput").keyup((event) => {
         if(data.succ) {
             var code = data.val.code
             var name = data.val.name
-            html += "<li><a href='#' onClick='filterData(\""+code+"\","+name+")'>"+name+"</a></li>"
+            html += "<li><a href='#' onClick='filterData(\""+code+"\",\""+name+"\")'>"+name+"</a></li>"
             $("#filterData").html(html)
         } else {
             html += `<li><a href="#" >none</a></li>`

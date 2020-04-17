@@ -222,7 +222,7 @@ $("#searchInput").keyup(function (event) {
     if (data.succ) {
       var code = data.val.code;
       var name = data.val.name;
-      html += "<li><a href='#' onClick='filterData(\"" + code + "\"," + name + ")'>" + name + "</a></li>";
+      html += "<li><a href='#' onClick='filterData(\"" + code + "\",\"" + name + "\")'>" + name + "</a></li>";
       $("#filterData").html(html);
     } else {
       html += "<li><a href=\"#\" >none</a></li>";
@@ -246,7 +246,7 @@ window.filterData = function (code, name) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\laragon\www\booking\resources\js\pages\searchBar.js */"./resources/js/pages/searchBar.js");
+module.exports = __webpack_require__(/*! /srv/www/booking/resources/js/pages/searchBar.js */"./resources/js/pages/searchBar.js");
 
 
 /***/ })

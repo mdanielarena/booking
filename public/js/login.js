@@ -144,7 +144,7 @@ window.signUpPost = function (e) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\laragon\www\booking\resources\js\pages\login.js */"./resources/js/pages/login.js");
+module.exports = __webpack_require__(/*! /srv/www/booking/resources/js/pages/login.js */"./resources/js/pages/login.js");
 
 
 /***/ })
