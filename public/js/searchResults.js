@@ -81,70 +81,32 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/pages/login.js":
-/*!*************************************!*\
-  !*** ./resources/js/pages/login.js ***!
-  \*************************************/
+/***/ "./resources/js/pages/searchResults.js":
+/*!*********************************************!*\
+  !*** ./resources/js/pages/searchResults.js ***!
+  \*********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-window.loginModal = function (e) {
-  var html = '';
-  html += "\n        <form action=\"/test.php\">\n            <div class=\"form-group\">\n                <label for=\"email\">Email address:</label>\n                <input type=\"email\" class=\"form-control\" id=\"email\">\n            </div>\n            <div class=\"form-group\">  \n                <label for=\"pwd\">Password:</label>\n                <input type=\"password\" class=\"form-control\" id=\"password\">\n            </div>\n            <div class=\"checkbox\">\n                <label><a href=\"#\" onClick=\"SignUp()\">Sign Up?<span class=\"fa fa-angle-down\"></span></a></label>\n            </div>\n\n            <button type=\"button\" onClick=\"loginPost()\" class=\"btn btn-default\">Submit</button>\n        </form>";
-  $("#modalHeader").html("<h4 class=\"modal-title\">LOGIN</h4>");
-  $("#modalBody").html(html);
-  $("#globalModal").modal('show');
-};
-
-window.loginPost = function (e) {
-  var myurl = "".concat(url, "/login-post");
-  var postData = {
-    _token: token,
-    signIn_email: $("#email").val(),
-    signIn_password: $("#password").val()
-  };
-  $.post(myurl, postData, function (res) {
-    var data = JSON.parse(Base64.decode(res));
-    if (data.succ) window.location = "".concat(url);else $("#modalError").html("<div class=\"alert alert-danger\">Invalid username or Password</div>");
-  }, 'json');
-};
-
-window.SignUp = function (e) {
-  var html = '';
-  html += "\n        <form action=\"\">\n            <div class=\"form-group\">\n                <label for=\"email\">Email address:</label>\n                <input type=\"email\" class=\"form-control\" id=\"sup_email\">\n            </div>\n            <div class=\"form-group\">\n                <label for=\"pwd\">Password:</label>\n                <input type=\"password\" class=\"form-control\" id=\"sup_password\">\n            </div>\n            <div class=\"form-group\">\n                <label for=\"pwd\">Confirm Password:</label>\n                <input type=\"password\" class=\"form-control\" id=\"confirmpassword\">\n            </div>\n\n            <button type=\"button\" onClick=\"signUpPost()\" class=\"btn btn-default\">Submit</button>\n        </form>";
-  $("#modalHeader").html("<h4 class=\"modal-title\">SIGN UP</h4>");
-  $("#modalBody").html(html);
-};
-
-window.signUpPost = function (e) {
-  var myurl = "".concat(url, "/signup-post");
-  var postData = {
-    _token: token,
-    email: $("#sup_email").val(),
-    password: $("#sup_password").val(),
-    password_confirmation: $("#confirmpassword").val()
-  };
-  $.post(myurl, postData, function (res) {
-    var data = JSON.parse(Base64.decode(res));
-    if (data.succ) window.location = "".concat(url);
-  }, 'json');
+window.test = function (code, key) {
+  alert(key);
 };
 
 /***/ }),
 
-/***/ 2:
-/*!*******************************************!*\
-  !*** multi ./resources/js/pages/login.js ***!
-  \*******************************************/
+/***/ 0:
+/*!***************************************************!*\
+  !*** multi ./resources/js/pages/searchResults.js ***!
+  \***************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /srv/www/booking/resources/js/pages/login.js */"./resources/js/pages/login.js");
+module.exports = __webpack_require__(/*! /srv/www/booking/resources/js/pages/searchResults.js */"./resources/js/pages/searchResults.js");
 
 
 /***/ })

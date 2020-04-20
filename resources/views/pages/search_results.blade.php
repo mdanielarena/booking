@@ -1,22 +1,12 @@
 
 @extends('layouts.master')
 
-@section('content')
+@section('scripts')
+    <script src="{{ mix('/js/searchBar.js') }}"></script>
+    <script src="{{ mix('/js/searchResults.js') }}"></script>
+@endsection()
 
-<div class="inner-banner">
-    <img class="center-image" src="img/tour_list/inner_banner_1.jpg" alt="">
-    <div class="vertical-align">
-        <div class="container">
-            <ul class="banner-breadcrumb color-white clearfix">
-                <li><a class="link-blue-2" href="#">home</a> /</li>
-                <li><a class="link-blue-2" href="#">tours</a> /</li>
-                <li><span class="color-blue-2">list tours</span></li>
-            </ul>
-            <h2 class="color-white">all tours for you</h2>
-            <h4 class="color-white">We found: <span>640</span> tours</h4>
-        </div>
-    </div>
-</div>
+@section('content')
 
 <div class="list-wrapper bg-grey-2">
     <div class="container">
@@ -214,8 +204,11 @@
                     </div>					
                 </div>
             </div>
+
             <div class="col-xs-12 col-sm-8 col-md-9">
+
                 <div class="list-header clearfix">
+
                     <div class="drop-wrap drop-wrap-s-4 color-4 list-sort">
                         <div class="drop">
                             <b>Sort by price</b>
@@ -238,442 +231,44 @@
                     </div>
                     
                 </div>
+
                 <div class="grid-content clearfix">
-                    <div class="list-item-entry">
-                        <div class="hotel-item style-3 bg-white">
-                            <div class="table-view">
-                                <div class="radius-top cell-view">
-                                    <img src="img/tour_list/tour_grid_1.jpg" alt="">          	 	 
-                                </div>
-                                <div class="title hotel-middle clearfix cell-view">
-                                    <div class="date list-hidden">July <strong>19th</strong> to July <strong>26th</strong></div>
-                                    <div class="date grid-hidden"><strong>19.07 - 26.07 / 7</strong> night</div>
-                                    <h4><b>tours in greece</b></h4>
-                                        <div class="rate-wrap">
-                                            <div class="rate">
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            </div>
-                                            <i>485 rewies</i> 
-                                        </div> 
-                                    <p class="f-14 grid-hidden">Nunc cursus libero purus ac congue arcu cur sus ut sed vitae pulvinar. Nunc cursus libero purus ac congue arcu.</p>
-                                </div>
-                                <div class="title hotel-right clearfix cell-view"> 
-                                    <div class="hotel-person color-dark-2">from <span class="color-blue">$273</span> person</div>
-                                    <a class="c-button b-40 bg-blue hv-blue-o grid-hidden" href="#">view more</a>
-                                </div>
+
+                    @for($x = 0;$x < count($value['results']);$x++)
+                        @if(isset($value['results'][$x]['hotel_info']))
+
+                            <?php $code = encrypt($value['results'][$x]['products'][0]['code']);?>
+                            
+                            <div class="list-item-entry" onclick="hotelAvailability('<?php echo $code ?>','<?php echo $key ?>')">
+                                <div class="hotel-item style-3 bg-white">
+                                    <div class="table-view">
+                                        <div class="radius-top cell-view">
+                                            <img src="{{$value['results'][$x]['hotel_info']['images']['large']}}" alt="">          	 	 
+                                        </div>
+                                        <div class="title hotel-middle clearfix cell-view">
+                                            <h4><b>{{$value['results'][$x]['hotel_info']['name']}} </b></h4>
+                                                <div class="rate-wrap">
+                                                    <div class="rate">
+                                                    <span class="fa fa-star color-yellow"></span>
+                                                    <span class="fa fa-star color-yellow"></span>
+                                                    <span class="fa fa-star color-yellow"></span>
+                                                    <span class="fa fa-star color-yellow"></span>
+                                                    <span class="fa fa-star color-yellow"></span>
+                                                    </div>
+                                                    <i>{{$value['results'][$x]['hotel_info']['stars']}} stars</i> 
+                                                </div> 
+                                            <p class="f-14 grid-hidden">{{$value['results'][$x]['hotel_info']['address']}}</p>
+                                        </div>
+                                        <div class="title hotel-right clearfix cell-view"> 
+                                            <div class="hotel-person color-dark-2">from <span class="color-blue">EUR {{$value['results'][$x]['products'][0]['price']}}</span></div>
+                                            <a class="c-button b-40 bg-blue hv-blue-o grid-hidden" href="#">view more</a>
+                                        </div>
+                                    </div>
+                                </div>  						
                             </div>
-                        </div>  						
-                    </div>
-                    <div class="list-item-entry">
-                        <div class="hotel-item style-3 bg-white">
-                            <div class="table-view">
-                                <div class="radius-top cell-view">
-                                    <img src="img/tour_list/tour_grid_2.jpg" alt="">          	 	 
-                                </div>
-                                <div class="title hotel-middle clearfix cell-view">
-                                    <div class="date list-hidden">July <strong>19th</strong> to July <strong>26th</strong></div>
-                                    <div class="date grid-hidden"><strong>19.07 - 26.07 / 7</strong> night</div>
-                                    <h4><b>tours in monaco</b></h4>
-                                        <div class="rate-wrap">
-                                            <div class="rate">
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            </div>
-                                            <i>485 rewies</i> 
-                                        </div> 
-                                    <p class="f-14 grid-hidden">Nunc cursus libero purus ac congue arcu cur sus ut sed vitae pulvinar. Nunc cursus libero purus ac congue arcu.</p>
-                                </div>
-                                <div class="title hotel-right clearfix cell-view"> 
-                                    <div class="hotel-person color-dark-2">from <span class="color-blue">$703</span> person</div>
-                                    <a class="c-button b-40 bg-blue hv-blue-o grid-hidden" href="#">view more</a>
-                                </div>
-                            </div>
-                        </div>  						
-                    </div>
-                    <div class="list-item-entry">
-                        <div class="hotel-item style-3 bg-white">
-                            <div class="table-view">
-                                <div class="radius-top cell-view">
-                                    <img src="img/tour_list/tour_grid_3.jpg" alt="">          	 	 
-                                </div>
-                                <div class="title hotel-middle clearfix cell-view">
-                                    <div class="date list-hidden">July <strong>19th</strong> to July <strong>26th</strong></div>
-                                    <div class="date grid-hidden"><strong>19.07 - 26.07 / 7</strong> night</div>
-                                    <h4><b>tours in italy</b></h4>
-                                        <div class="rate-wrap">
-                                            <div class="rate">
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            </div>
-                                            <i>485 rewies</i> 
-                                        </div> 
-                                    <p class="f-14 grid-hidden">Nunc cursus libero purus ac congue arcu cur sus ut sed vitae pulvinar. Nunc cursus libero purus ac congue arcu.</p>
-                                </div>
-                                <div class="title hotel-right clearfix cell-view"> 
-                                    <div class="hotel-person color-dark-2">from <span class="color-blue">$300</span> person</div>
-                                    <a class="c-button b-40 bg-blue hv-blue-o grid-hidden" href="#">view more</a>
-                                </div>
-                            </div>
-                        </div>  						
-                    </div>
-                    <div class="list-item-entry">
-                        <div class="hotel-item style-3 bg-white">
-                            <div class="table-view">
-                                <div class="radius-top cell-view">
-                                    <img src="img/tour_list/tour_grid_4.jpg" alt="">          	 	 
-                                </div>
-                                <div class="title hotel-middle clearfix cell-view">
-                                    <div class="date list-hidden">July <strong>19th</strong> to July <strong>26th</strong></div>
-                                    <div class="date grid-hidden"><strong>19.07 - 26.07 / 7</strong> night</div>
-                                    <h4><b>tours in miami</b></h4>
-                                        <div class="rate-wrap">
-                                            <div class="rate">
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            </div>
-                                            <i>485 rewies</i> 
-                                        </div> 
-                                    <p class="f-14 grid-hidden">Nunc cursus libero purus ac congue arcu cur sus ut sed vitae pulvinar. Nunc cursus libero purus ac congue arcu.</p>
-                                </div>
-                                <div class="title hotel-right clearfix cell-view"> 
-                                    <div class="hotel-person color-dark-2">from <span class="color-blue">$400</span> person</div>
-                                    <a class="c-button b-40 bg-blue hv-blue-o grid-hidden" href="#">view more</a>
-                                </div>
-                            </div>
-                        </div>  						
-                    </div> 
-                    <div class="list-item-entry">
-                        <div class="hotel-item style-3 bg-white">
-                            <div class="table-view">
-                                <div class="radius-top cell-view">
-                                    <img src="img/tour_list/tour_grid_5.jpg" alt="">          	 	 
-                                </div>
-                                <div class="title hotel-middle clearfix cell-view">
-                                    <div class="date list-hidden">July <strong>19th</strong> to July <strong>26th</strong></div>
-                                    <div class="date grid-hidden"><strong>19.07 - 26.07 / 7</strong> night</div>
-                                    <h4><b>tours in USA</b></h4>
-                                        <div class="rate-wrap">
-                                            <div class="rate">
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            </div>
-                                            <i>485 rewies</i> 
-                                        </div> 
-                                    <p class="f-14 grid-hidden">Nunc cursus libero purus ac congue arcu cur sus ut sed vitae pulvinar. Nunc cursus libero purus ac congue arcu.</p>
-                                </div>
-                                <div class="title hotel-right clearfix cell-view"> 
-                                    <div class="hotel-person color-dark-2">from <span class="color-blue">$273</span> person</div>
-                                    <a class="c-button b-40 bg-blue hv-blue-o grid-hidden" href="#">view more</a>
-                                </div>
-                            </div>
-                        </div>  						
-                    </div>
-                    <div class="list-item-entry">
-                        <div class="hotel-item style-3 bg-white">
-                            <div class="table-view">
-                                <div class="radius-top cell-view">
-                                    <img src="img/tour_list/tour_grid_6.jpg" alt="">          	 	 
-                                </div>
-                                <div class="title hotel-middle clearfix cell-view">
-                                    <div class="date list-hidden">July <strong>19th</strong> to July <strong>26th</strong></div>
-                                    <div class="date grid-hidden"><strong>19.07 - 26.07 / 7</strong> night</div>
-                                    <h4><b>tours in santorini</b></h4>
-                                        <div class="rate-wrap">
-                                            <div class="rate">
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            </div>
-                                            <i>485 rewies</i> 
-                                        </div> 
-                                    <p class="f-14 grid-hidden">Nunc cursus libero purus ac congue arcu cur sus ut sed vitae pulvinar. Nunc cursus libero purus ac congue arcu.</p>
-                                </div>
-                                <div class="title hotel-right clearfix cell-view"> 
-                                    <div class="hotel-person color-dark-2">from <span class="color-blue">$500</span> person</div>
-                                    <a class="c-button b-40 bg-blue hv-blue-o grid-hidden" href="#">view more</a>
-                                </div>
-                            </div>
-                        </div>  						
-                    </div>
-                    <div class="list-item-entry">
-                        <div class="hotel-item style-3 bg-white">
-                            <div class="table-view">
-                                <div class="radius-top cell-view">
-                                    <img src="img/tour_list/tour_grid_7.jpg" alt="">          	 	 
-                                </div>
-                                <div class="title hotel-middle clearfix cell-view">
-                                    <div class="date list-hidden">July <strong>19th</strong> to July <strong>26th</strong></div>
-                                    <div class="date grid-hidden"><strong>19.07 - 26.07 / 7</strong> night</div>
-                                    <h4><b>tours in monaco</b></h4>
-                                        <div class="rate-wrap">
-                                            <div class="rate">
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            </div>
-                                            <i>485 rewies</i> 
-                                        </div> 
-                                    <p class="f-14 grid-hidden">Nunc cursus libero purus ac congue arcu cur sus ut sed vitae pulvinar. Nunc cursus libero purus ac congue arcu.</p>
-                                </div>
-                                <div class="title hotel-right clearfix cell-view"> 
-                                    <div class="hotel-person color-dark-2">from <span class="color-blue">$273</span> person</div>
-                                    <a class="c-button b-40 bg-blue hv-blue-o grid-hidden" href="#">view more</a>
-                                </div>
-                            </div>
-                        </div>  						
-                    </div>
-                    <div class="list-item-entry">
-                        <div class="hotel-item style-3 bg-white">
-                            <div class="table-view">
-                                <div class="radius-top cell-view">
-                                    <img src="img/tour_list/tour_grid_8.jpg" alt="">          	 	 
-                                </div>
-                                <div class="title hotel-middle clearfix cell-view">
-                                    <div class="date list-hidden">July <strong>19th</strong> to July <strong>26th</strong></div>
-                                    <div class="date grid-hidden"><strong>19.07 - 26.07 / 7</strong> night</div>
-                                    <h4><b>tours in paris</b></h4>
-                                        <div class="rate-wrap">
-                                            <div class="rate">
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            </div>
-                                            <i>485 rewies</i> 
-                                        </div> 
-                                    <p class="f-14 grid-hidden">Nunc cursus libero purus ac congue arcu cur sus ut sed vitae pulvinar. Nunc cursus libero purus ac congue arcu.</p>
-                                </div>
-                                <div class="title hotel-right clearfix cell-view"> 
-                                    <div class="hotel-person color-dark-2">from <span class="color-blue">$300</span> person</div>
-                                    <a class="c-button b-40 bg-blue hv-blue-o grid-hidden" href="#">view more</a>
-                                </div>
-                            </div>
-                        </div>  						
-                    </div>
-                    <div class="list-item-entry">
-                        <div class="hotel-item style-3 bg-white">
-                            <div class="table-view">
-                                <div class="radius-top cell-view">
-                                    <img src="img/tour_list/tour_grid_9.jpg" alt="">          	 	 
-                                </div>
-                                <div class="title hotel-middle clearfix cell-view">
-                                    <div class="date list-hidden">July <strong>19th</strong> to July <strong>26th</strong></div>
-                                    <div class="date grid-hidden"><strong>19.07 - 26.07 / 7</strong> night</div>
-                                    <h4><b>tours in brasil</b></h4>
-                                        <div class="rate-wrap">
-                                            <div class="rate">
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            </div>
-                                            <i>485 rewies</i> 
-                                        </div> 
-                                    <p class="f-14 grid-hidden">Nunc cursus libero purus ac congue arcu cur sus ut sed vitae pulvinar. Nunc cursus libero purus ac congue arcu.</p>
-                                </div>
-                                <div class="title hotel-right clearfix cell-view"> 
-                                    <div class="hotel-person color-dark-2">from <span class="color-blue">$300</span> person</div>
-                                    <a class="c-button b-40 bg-blue hv-blue-o grid-hidden" href="#">view more</a>
-                                </div>
-                            </div>
-                        </div>  						
-                    </div>
-                    <div class="list-item-entry">
-                        <div class="hotel-item style-3 bg-white">
-                            <div class="table-view">
-                                <div class="radius-top cell-view">
-                                    <img src="img/tour_list/tour_grid_10.jpg" alt="">          	 	 
-                                </div>
-                                <div class="title hotel-middle clearfix cell-view">
-                                    <div class="date list-hidden">July <strong>19th</strong> to July <strong>26th</strong></div>
-                                    <div class="date grid-hidden"><strong>19.07 - 26.07 / 7</strong> night</div>
-                                    <h4><b>tours in monte carlo</b></h4>
-                                        <div class="rate-wrap">
-                                            <div class="rate">
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            </div>
-                                            <i>485 rewies</i> 
-                                        </div> 
-                                    <p class="f-14 grid-hidden">Nunc cursus libero purus ac congue arcu cur sus ut sed vitae pulvinar. Nunc cursus libero purus ac congue arcu.</p>
-                                </div>
-                                <div class="title hotel-right clearfix cell-view"> 
-                                    <div class="hotel-person color-dark-2">from <span class="color-blue">$200</span> person</div>
-                                    <a class="c-button b-40 bg-blue hv-blue-o grid-hidden" href="#">view more</a>
-                                </div>
-                            </div>
-                        </div>  						
-                    </div>
-                    <div class="list-item-entry">
-                        <div class="hotel-item style-3 bg-white">
-                            <div class="table-view">
-                                <div class="radius-top cell-view">
-                                    <img src="img/tour_list/tour_grid_11.jpg" alt="">          	 	 
-                                </div>
-                                <div class="title hotel-middle clearfix cell-view">
-                                    <div class="date list-hidden">July <strong>19th</strong> to July <strong>26th</strong></div>
-                                    <div class="date grid-hidden"><strong>19.07 - 26.07 / 7</strong> night</div>
-                                    <h4><b>tours in bora bora</b></h4>
-                                        <div class="rate-wrap">
-                                            <div class="rate">
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            </div>
-                                            <i>485 rewies</i> 
-                                        </div> 
-                                    <p class="f-14 grid-hidden">Nunc cursus libero purus ac congue arcu cur sus ut sed vitae pulvinar. Nunc cursus libero purus ac congue arcu.</p>
-                                </div>
-                                <div class="title hotel-right clearfix cell-view"> 
-                                    <div class="hotel-person color-dark-2">from <span class="color-blue">$333</span> person</div>
-                                    <a class="c-button b-40 bg-blue hv-blue-o grid-hidden" href="#">view more</a>
-                                </div>
-                            </div>
-                        </div>  						
-                    </div>
-                    <div class="list-item-entry">
-                        <div class="hotel-item style-3 bg-white">
-                            <div class="table-view">
-                                <div class="radius-top cell-view">
-                                    <img src="img/tour_list/tour_grid_12.jpg" alt="">          	 	 
-                                </div>
-                                <div class="title hotel-middle clearfix cell-view">
-                                    <div class="date list-hidden">July <strong>19th</strong> to July <strong>26th</strong></div>
-                                    <div class="date grid-hidden"><strong>19.07 - 26.07 / 7</strong> night</div>
-                                    <h4><b>tours in france</b></h4>
-                                        <div class="rate-wrap">
-                                            <div class="rate">
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            </div>
-                                            <i>485 rewies</i> 
-                                        </div> 
-                                    <p class="f-14 grid-hidden">Nunc cursus libero purus ac congue arcu cur sus ut sed vitae pulvinar. Nunc cursus libero purus ac congue arcu.</p>
-                                </div>
-                                <div class="title hotel-right clearfix cell-view"> 
-                                    <div class="hotel-person color-dark-2">from <span class="color-blue">$250</span> person</div>
-                                    <a class="c-button b-40 bg-blue hv-blue-o grid-hidden" href="#">view more</a>
-                                </div>
-                            </div>
-                        </div>  						
-                    </div>
-                    <div class="list-item-entry">
-                        <div class="hotel-item style-3 bg-white">
-                            <div class="table-view">
-                                <div class="radius-top cell-view">
-                                    <img src="img/tour_list/tour_grid_13.jpg" alt="">          	 	 
-                                </div>
-                                <div class="title hotel-middle clearfix cell-view">
-                                    <div class="date list-hidden">July <strong>19th</strong> to July <strong>26th</strong></div>
-                                    <div class="date grid-hidden"><strong>19.07 - 26.07 / 7</strong> night</div>
-                                    <h4><b>tours in spaine</b></h4>
-                                        <div class="rate-wrap">
-                                            <div class="rate">
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            </div>
-                                            <i>485 rewies</i> 
-                                        </div> 
-                                    <p class="f-14 grid-hidden">Nunc cursus libero purus ac congue arcu cur sus ut sed vitae pulvinar. Nunc cursus libero purus ac congue arcu.</p>
-                                </div>
-                                <div class="title hotel-right clearfix cell-view"> 
-                                    <div class="hotel-person color-dark-2">from <span class="color-blue">$750</span> person</div>
-                                    <a class="c-button b-40 bg-blue hv-blue-o grid-hidden" href="#">view more</a>
-                                </div>
-                            </div>
-                        </div>  						
-                    </div>
-                    <div class="list-item-entry">
-                        <div class="hotel-item style-3 bg-white">
-                            <div class="table-view">
-                                <div class="radius-top cell-view">
-                                    <img src="img/tour_list/tour_grid_14.jpg" alt="">          	 	 
-                                </div>
-                                <div class="title hotel-middle clearfix cell-view">
-                                    <div class="date list-hidden">July <strong>19th</strong> to July <strong>26th</strong></div>
-                                    <div class="date grid-hidden"><strong>19.07 - 26.07 / 7</strong> night</div>
-                                    <h4><b>tours in marmaris</b></h4>
-                                        <div class="rate-wrap">
-                                            <div class="rate">
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            </div>
-                                            <i>485 rewies</i> 
-                                        </div> 
-                                    <p class="f-14 grid-hidden">Nunc cursus libero purus ac congue arcu cur sus ut sed vitae pulvinar. Nunc cursus libero purus ac congue arcu.</p>
-                                </div>
-                                <div class="title hotel-right clearfix cell-view"> 
-                                    <div class="hotel-person color-dark-2">from <span class="color-blue">$273</span> person</div>
-                                    <a class="c-button b-40 bg-blue hv-blue-o grid-hidden" href="#">view more</a>
-                                </div>
-                            </div>
-                        </div>  						
-                    </div>
-                    <div class="list-item-entry">
-                        <div class="hotel-item style-3 bg-white">
-                            <div class="table-view">
-                                <div class="radius-top cell-view">
-                                    <img src="img/tour_list/tour_grid_15.jpg" alt="">          	 	 
-                                </div>
-                                <div class="title hotel-middle clearfix cell-view">
-                                    <div class="date list-hidden">July <strong>19th</strong> to July <strong>26th</strong></div>
-                                    <div class="date grid-hidden"><strong>19.07 - 26.07 / 7</strong> night</div>
-                                    <h4><b>tours in monaco</b></h4>
-                                        <div class="rate-wrap">
-                                            <div class="rate">
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            <span class="fa fa-star color-yellow"></span>
-                                            </div>
-                                            <i>485 rewies</i> 
-                                        </div> 
-                                    <p class="f-14 grid-hidden">Nunc cursus libero purus ac congue arcu cur sus ut sed vitae pulvinar. Nunc cursus libero purus ac congue arcu.</p>
-                                </div>
-                                <div class="title hotel-right clearfix cell-view"> 
-                                    <div class="hotel-person color-dark-2">from <span class="color-blue">$503</span> person</div>
-                                    <a class="c-button b-40 bg-blue hv-blue-o grid-hidden" href="#">view more</a>
-                                </div>
-                            </div>
-                        </div>  						
-                    </div>
+                        @endif
+                    @endfor
+
                 </div>
 
                 <div class="c_pagination clearfix padd-120">

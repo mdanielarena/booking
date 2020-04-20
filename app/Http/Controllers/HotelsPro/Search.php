@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Traits\HotelsProApi;
 use App\Models\Destinations;
+use App\Models\Hotels;
 use App\Models\SearchKey;
 use Illuminate\Support\Facades\Redis;
 use Ramsey\Uuid\Uuid;
-
+use DB;
+use Carbon\Carbon;
 
 class Search extends Controller
 {
@@ -56,14 +58,51 @@ class Search extends Controller
 
         $url = "/search/?$pax&checkout=$checkOut&checkin=$checkIn&destination_code=$code&client_nationality=ph&currency=EUR";
         $val = $this->_hotelspro->hotelsProApi($method,$url,$data,$code);
-
-        Redis::set("search-results-$key",json_encode($val),'EX', 3600 * 7);
         
-        return redirect("/search-results?key=$key");
+        if(isset($val['error_code'])) {
+            print_R($val);die; //fix this create function for this!!
+        } else {
+
+            Redis::set("search-results-$key",json_encode($val),'EX', 3600 * 7);
+
+            return redirect("/search-results?key=$key");
+        }
 
     }
 
     public function searchResults(Request $request) {
-        return view('pages.search_results');
+
+        $key = $request->input('key');
+
+        if(Redis::get("search-results-$key")) {
+            
+            $data = json_decode(Redis::get("search-results-".$key),true);
+            $destination = DB::table('search_keys')->select('name')->where('key',$key)->first();
+            $data['destination'] = $destination->name;
+            
+            $results = $data['results'];
+            
+            for($x = 0; $x < count($data['results']);$x++) {
+                
+                $checkHotel = DB::table('hotels')->select('name','stars','address','images')
+                                ->where('code',$data['results'][$x]['hotel_code'])->first();
+
+                if($checkHotel) {
+
+                   $value = json_decode($checkHotel->images);
+                   //not yet inserted the old consumer file,just do the checking for the meantime
+                   $data['results'][$x]['hotel_info'] = $checkHotel; 
+                   //choose if ->large/mid/small
+                   $data['results'][$x]['hotel_info']->images = isset($value[0]->thumbnail_images) ? $value[0]->thumbnail_images : '';
+                   
+                }                
+                
+            }
+            
+            Redis::set("search-results-display-$key",json_encode($data),'EX', 3600 * 7);
+
+            return view('pages.search_results')->with(['value' => json_decode(Redis::get("search-results-display-$key"),true),'key' => $key]);
+        }
+
     }
 }
