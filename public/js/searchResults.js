@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-window.test = function (code, key) {
+window.hotelAvailability = function (code, key) {
   alert(key);
 };
 
