@@ -23,13 +23,21 @@ Route::get('/test-search','HotelsPro\TestController@search');
 Route::get('/test-hotelAvailability','HotelsPro\TestController@hotelAvailability');
 Route::get('/test-provision','HotelsPro\TestController@provision');
 
+
+//Notification/Errors
+Route::get('notification','Traits\HotelsProApi@showNotificationView');
+
 /**Hotels-Pro-APIs**/
 
 //search
 Route::post('search-data','HotelsPro\Search@searchData');
 Route::post('search-post','HotelsPro\Search@searchPost');
-//search-results
 Route::get('search-results','HotelsPro\Search@searchResults');
+
+//hotel-availability
+Route::post('hotel-availability','HotelsPro\HotelAvailability@results');
+Route::get('hotel-details','HotelsPro\HotelAvailability@hotelDetails');
+
 
 
 

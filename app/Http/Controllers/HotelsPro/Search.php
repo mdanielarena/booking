@@ -8,6 +8,8 @@ use App\Http\Controllers\Traits\HotelsProApi;
 use App\Models\Destinations;
 use App\Models\Hotels;
 use App\Models\SearchKey;
+use App\Models\Errors;
+use App\Models\SearchApi;
 use Illuminate\Support\Facades\Redis;
 use Ramsey\Uuid\Uuid;
 use DB;
@@ -60,12 +62,25 @@ class Search extends Controller
         $val = $this->_hotelspro->hotelsProApi($method,$url,$data,$code);
         
         if(isset($val['error_code'])) {
-            print_R($val);die; //fix this create function for this!!
+
+            Errors::create(['key'=> $key,'methods'=> 'search','results'=> $val]);
+
         } else {
 
-            Redis::set("search-results-$key",json_encode($val),'EX', 3600 * 7);
+            if($val['count']) {
 
-            return redirect("/search-results?key=$key");
+                SearchApi::create(['key' => $key,'results' => json_encode($val)]);
+
+                Redis::set("search-results-$key",json_encode($val),'EX', 3600 * 7);
+
+                return redirect("/search-results?key=$key");
+
+            } else {
+                
+                return redirect("/notification?key=$key");
+            }
+
+            
         }
 
     }

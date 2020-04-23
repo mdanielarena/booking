@@ -19,7 +19,7 @@ trait hpApi {
         $this->h_url = config('app.h_url');
 
         $init = ($method === 'post') ? $this->h_url.$url.$code : $this->h_url.$url;
-    
+        
         $ch = curl_init($init);
         
         if($method === 'post') {
@@ -33,6 +33,7 @@ trait hpApi {
             $response = curl_exec($ch);
             curl_close($ch);
             $val = json_decode($response,true);
+
             return $val;
     }
 
@@ -41,4 +42,10 @@ trait hpApi {
 class HotelsProApi extends Controller
 {
     use hpApi;
+
+    public function showNotificationView(Request $request) {
+        
+        return view('pages.notification');
+
+    }
 }

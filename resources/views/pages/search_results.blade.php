@@ -3,8 +3,12 @@
 
 @section('scripts')
     <script src="{{ mix('/js/searchBar.js') }}"></script>
-    <script src="{{ mix('/js/searchResults.js') }}"></script>
+    <script src="{{ mix('/js/hotelAvailability.js') }}"></script>
 @endsection()
+
+@section('searchBbar')
+    @include('layouts.search_bar')
+@endsection
 
 @section('content')
 
@@ -20,12 +24,14 @@
 
                 <div class="grid-content clearfix">
 
+                    <?php $code = encrypt($value['code']); ?>
+                    
                     @for($x = 0;$x < count($value['results']);$x++)
                         @if(isset($value['results'][$x]['hotel_info']))
 
-                            <?php $code = encrypt($value['results'][$x]['products'][0]['code']);?>
+                            <?php $hotel_code = encrypt($value['results'][$x]['hotel_code']); ?>
                             
-                            <div class="list-item-entry" onclick="hotelAvailability('<?php echo $code ?>','<?php echo $key ?>')">
+                            <div class="list-item-entry" onclick="hotelAvailability('<?php echo $code ?>','<?php echo $key ?>','<?php echo $hotel_code?>')">
                                 <div class="hotel-item style-3 bg-white">
                                     <div class="table-view">
                                         <div class="radius-top cell-view">

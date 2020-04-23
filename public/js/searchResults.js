@@ -93,8 +93,17 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-window.hotelAvailability = function (code, key) {
-  alert(key);
+window.hotelAvailability = function (code, key, hotel_code) {
+  var postData = {
+    _token: token,
+    key: key,
+    code: code,
+    hotel_code: hotel_code
+  };
+  var myurl = "".concat(url, "/hotel-availability");
+  $.post(myurl, postData, function (res) {
+    console.log(res);
+  }, 'json');
 };
 
 /***/ }),

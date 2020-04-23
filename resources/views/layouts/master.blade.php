@@ -19,7 +19,7 @@
     @include('layouts.header')
     <div class="full-height">
         <div class="clip"><div class="bg bg-bg-chrome" style="background-image:url(img/home_2/main_image.jpg)"></div></div>
-        @include('layouts.search_bar')
+        @yield('searchBbar')
     </div>
       {{-- @include('layouts.some_contents') --}}
     @yield('content')

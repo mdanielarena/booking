@@ -33,6 +33,7 @@ const mix = require('laravel-mix');
     'resources/assets_css/style.css',
  ],'public/css/assets_css.css')
 .js('resources/js/pages/searchResults.js','public/js')
+.js('resources/js/pages/hotelAvailability.js','public/js')
 .js('resources/js/pages/searchBar.js','public/js')
 .js('resources/js/pages/login.js','public/js')
 .version();

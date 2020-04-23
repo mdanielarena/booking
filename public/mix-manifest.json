@@ -1,7 +1,8 @@
 {
-    "/js/login.js": "/js/login.js?id=a4995ce7b8e43939b6d1",
-    "/js/searchBar.js": "/js/searchBar.js?id=1f52b5d72c1c3700ac5b",
-    "/js/searchResults.js": "/js/searchResults.js?id=75bc2476b918ed3ade14",
+    "/js/hotelAvailability.js": "/js/hotelAvailability.js?id=6e754d6df6ef76eb7cdd",
+    "/js/login.js": "/js/login.js?id=07a7b7e17bd4da4486db",
+    "/js/searchBar.js": "/js/searchBar.js?id=c550fd0e197165d3e365",
+    "/js/searchResults.js": "/js/searchResults.js?id=9e1d244e567fd5fbf7e0",
     "/js/assets_js.js": "/js/assets_js.js?id=7dc8762b94c604f902fd",
     "/css/assets_css.css": "/css/assets_css.css?id=628776b88683aa0545a5"
 }
