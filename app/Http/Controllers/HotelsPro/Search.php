@@ -8,8 +8,6 @@ use App\Http\Controllers\Traits\HotelsProApi;
 use App\Models\Destinations;
 use App\Models\Hotels;
 use App\Models\SearchKey;
-use App\Models\Errors;
-use App\Models\SearchApi;
 use Illuminate\Support\Facades\Redis;
 use Ramsey\Uuid\Uuid;
 use DB;
@@ -59,30 +57,22 @@ class Search extends Controller
         ]);
 
         $url = "/search/?$pax&checkout=$checkOut&checkin=$checkIn&destination_code=$code&client_nationality=ph&currency=EUR";
-        $val = $this->_hotelspro->hotelsProApi($method,$url,$data,$code);
+        $val = $this->_hotelspro->hotelsProApi($method,$url,$data,$code,$key,$model = 'SearchApi');
         
-        if(isset($val['error_code'])) {
+        if($val['check']['notif']) {
 
-            Errors::create(['key'=> $key,'methods'=> 'search','results'=> $val]);
+            $msg = $val['check']['msg'];
+            
+            return redirect("/notification?key=$key&data=$msg");
 
         } else {
-
-            if($val['count']) {
-
-                SearchApi::create(['key' => $key,'results' => json_encode($val)]);
-
-                Redis::set("search-results-$key",json_encode($val),'EX', 3600 * 7);
-
-                return redirect("/search-results?key=$key");
-
-            } else {
-                
-                return redirect("/notification?key=$key");
-            }
-
             
-        }
+            Redis::set("search-results-$key",json_encode($val),'EX', 3600 * 7);
 
+            return redirect("/search-results?key=$key");
+
+        }
+        
     }
 
     public function searchResults(Request $request) {

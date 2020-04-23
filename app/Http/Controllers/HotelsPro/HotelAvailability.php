@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Traits\HotelsProApi;
 use Illuminate\Support\Facades\Redis;
-use App\Models\HotelAvailabilityApi;
 use App\Models\Errors;
+use App\Models\NoReturn;
 use DB;
 
 class HotelAvailability extends Controller
@@ -29,29 +29,22 @@ class HotelAvailability extends Controller
         $code = '';
         $method = "get";
 
-        $val = $this->_api->hotelsProApi($method,$url,$data,$code);
+        $val = $this->_api->hotelsProApi($method,$url,$data,$code,$key,$model = 'HotelAvailabilityApi');
 
-        if(isset($val['error_code'])) {
+        if($val['check']['notif']) {
 
-            Errors::create(['key'=> $key,'methods'=> 'hotel-availablity','results'=> $val]);
+            $msg = $val['check']['msg'];
+            
+            return response()->json(base64_encode(json_encode(['key'=> $key , 'notif' => 1 ,'msg' => $msg])));
 
         } else {
+            
+            Redis::set("hotel-availability-$key",json_encode($val),'EX', 3600 * 7);
 
-            if($val['count']) {
-
-                HotelAvailabilityApi::create(['key' => $key,'results' => json_encode($val)]);
-
-                Redis::set("hotel-availability-$key",json_encode($val),'EX', 3600 * 7);
-
-                return response()->json(base64_encode(json_encode(['key'=> $key , 'notif' => 0])));
-
-            } else {
-
-                return response()->json(base64_encode(json_encode(['key'=> $key , 'notif' => 1])));
-
-            }
+            return response()->json(base64_encode(json_encode(['key'=> $key , 'notif' => 0 , 'msg' => ''])));
 
         }
+
     }
 
     public function hotelDetails(Request $request) {
