@@ -57,8 +57,8 @@ class Search extends Controller
         ]);
 
         $url = "/search/?$pax&checkout=$checkOut&checkin=$checkIn&destination_code=$code&client_nationality=ph&currency=EUR";
-        $val = $this->_hotelspro->hotelsProApi($method,$url,$data,$code,$key,$model = 'SearchApi');
-        
+        $val = $this->_hotelspro->hotelsProApi($method,$url,$data,$code,$key,$model = '\App\Models\SearchApi');
+         
         if($val['check']['notif']) {
 
             $msg = $val['check']['msg'];
